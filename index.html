@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<title>美军行动数据可视化</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="lib/echarts.js"></script>
+		<script type="text/javascript" src="lib/echarts-liquidfill.js"></script>
+		<script type="text/javascript" src="lib/bmap.min.js"></script>
+		<script type="text/javascript" src="lib/d3.v5.min.js"></script>
+		<script type="text/javascript" src="lib/wordcloud2.js"></script>
+		<script type="text/javascript" src="lib/echarts-wordcloud.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DDLwA2CBFGHRpxFzFx3K5KnBQtHP4hte"></script>
+
+		<!-- mapbox尝试 -->
+		<!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script> -->
+		<!-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' /> -->
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+
+	</head>
+
+	<body class="bg01">
+		<header class="header">
+			<h3>美军行动数据可视化</h3>
+			<a id="switch_btn" href="index2.html"></a>
+		</header>
+
+		<div class="wrapper">
+			<div class="container-fluid">
+				<div class="row fill-h">
+					<div class="col-lg-3 fill-h">
+						<div class="xpanel-wrapper xpanel-wrapper-2">
+							<div class="xpanel">
+								<!-- 饼图 -->
+								<div class="fill-h" id="pie"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-2">
+							<div class="xpanel">
+								<!-- 折线图 -->
+								<div class="fill-h" id="line"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 fill-h">
+						<div class="xpanel-wrapper xpanel-wrapper-1">
+							<div class="xpanel">
+								<!-- 地图散点 -->
+								<div class="fill-h" id="map1"></div>
+								<div id='menu'>
+									<input id='streets-v11' type='radio' name='rtoggle' value='streets' checked='checked'>
+									<label for='streets'>streets</label>
+									<input id='light-v10' type='radio' name='rtoggle' value='light'>
+									<label for='light'>light</label>
+									<input id='dark-v10' type='radio' name='rtoggle' value='dark'>
+									<label for='dark'>dark</label>
+									<input id='outdoors-v11' type='radio' name='rtoggle' value='outdoors'>
+									<label for='outdoors'>outdoors</label>
+									<input id='satellite-v9' type='radio' name='rtoggle' value='satellite'>
+									<label for='satellite'>satellite</label>
+								</div>
+								<!-- 下拉框 -->
+								<select id="products" class="select" name="products" tabindex="10" onchange="getVal(this.options[this.options.selectedIndex].value)">
+									<option value="1" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;波斯湾</option>
+									<option value="2" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;洪都拉斯</option>
+									<option value="3" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;伊朗</option>
+									<option value="4" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;巴拿马</option>
+									<option value="5" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;利比亚</option>
+									<option value="6" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;哥伦比亚</option>
+									<option value="7" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;菲律宾</option>
+									<option value="8" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;利比里亚</option>
+									<option value="9" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;沙特阿拉伯</option>
+									<option value="10" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;伊拉克</option>
+									<option value="11" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;土耳其</option>
+									<option value="12" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扎伊尔</option>
+									<option value="13" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;塞拉利昂</option>
+									<option value="14" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索马里</option>
+									<option value="15" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;波黑</option>
+									<option value="16" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科威特</option>
+									<option value="17" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;波斯尼亚</option>
+									<option value="18" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;马其顿</option>
+									<option value="19" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;海地</option>
+									<option value="20" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中非共和国</option>
+									<option value="21" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;刚果和加蓬</option>
+									<option value="22" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阿尔巴尼亚</option>
+									<option value="23" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;柬埔寨</option>
+									<option value="24" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;塞尔维亚</option>
+									<option value="25" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;肯尼亚</option>
+									<option value="26" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阿富汗和苏丹</option>
+									<option value="27" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;东帝汶</option>
+									<option value="28" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尼日利亚</option>
+									<option value="29" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;也门</option>
+									<option value="30" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阿富汗</option>
+									<option value="31" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科特迪瓦</option>
+									<option value="32" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格鲁吉亚</option>
+									<option value="33" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;巴基斯坦</option>
+									<option value="34" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;黎巴嫩</option>
+									<option value="35" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;印度洋</option>
+									<option value="36" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乌干达</option>
+									<option value="37" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;约旦</option>
+									<option value="38" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乍得</option>
+									<option value="39" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;马里</option>
+									<option value="40" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;韩国</option>
+									<option value="41" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;叙利亚</option>
+									<option value="42" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;喀麦隆</option>
+									<option value="43" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;美国</option>
+									<option value="44" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多米尼加共和国</option>
+									<option value="45" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地中海</option>
+									<option value="46" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西班牙</option>
+									<option value="47" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法属波利尼西亚</option>
+									<option value="48" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加勒比海</option>
+									<option value="49" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阿尔及尔</option>
+									<option value="50" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;的黎波里</option>
+									<option value="51" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;非洲</option>
+									<option value="52" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;古巴</option>
+									<option value="53" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;波多黎各</option>
+									<option value="54" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;希腊</option>
+									<option value="55" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;英国</option>
+									<option value="56" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;印尼</option>
+									<option value="57" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;秘鲁</option>
+									<option value="58" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加拿大</option>
+									<option value="59" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;印度尼西亚</option>
+									<option value="60" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;斐济群岛</option>
+									<option value="61" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;太平洋</option>
+									<option value="62" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;萨摩亚</option>
+									<option value="63" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;象牙海岸</option>
+									<option value="64" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;墨西哥</option>
+									<option value="65" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中国</option>
+									<option value="66" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;约翰娜岛</option>
+									<option value="67" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阿根廷</option>
+									<option value="68" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尼加拉瓜</option>
+									<option value="69" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日本</option>
+									<option value="70" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;琉球和小笠原群岛</option>
+									<option value="71" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乌拉圭</option>
+									<option value="72" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;奥斯曼帝国</option>
+									<option value="73" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;巴拉圭</option>
+									<option value="74" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安哥拉</option>
+									<option value="75" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;巴拿马湾</option>
+									<option value="76" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台湾</option>
+									<option value="77" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;夏威夷</option>
+									<option value="78" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;埃及</option>
+									<option value="79" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;白令海</option>
+									<option value="80" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;智利</option>
+									<option value="81" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;埃塞俄比亚</option>
+									<option value="82" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;摩洛哥丹吉尔</option>
+									<option value="83" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;德国</option>
+									<option value="84" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;俄罗斯</option>
+									<option value="85" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;克罗地亚</option>
+									<option value="86" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;纽芬兰</option>
+									<option value="87" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格陵兰</option>
+									<option value="88" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;荷兰</option>
+									<option value="89" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;冰岛</option>
+									<option value="90" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;奥地利</option>
+									<option value="91" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;意大利</option>
+									<option value="92" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;耶路撒冷</option>
+									<option value="93" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;越南</option>
+									<option value="94" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;泰国</option>
+									<option value="95" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;老挝</option>
+									<option value="96" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;刚果</option>
+									<option value="97" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多米尼加</option>
+									<option value="98" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;玻利维亚</option>
+									<option value="99" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以色列</option>
+									<option value="100" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;塞浦路斯</option>
+									<option value="101" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;南扎伊尔</option>
+									<option value="102" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朝鲜</option>
+									<option value="103" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;萨尔瓦多</option>
+									<option value="104" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西奈</option>
+									<option value="105" class="option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格林纳达</option>
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 fill-h">
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<!-- 词云 -->
+								<div class="fill-h" id="world_cloud"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-4">
+							<div class="xpanel">
+								<!-- 太阳图-->
+								<div class="fill-h" id="sun"></div>
+							</div>
+						</div>
+						<!-- <div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel"> -->
+								<!-- 区县地图 -->
+								<!-- <div class="fill-h" id="countyMap"></div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		
+		<script type="text/javascript" src="js/pie.js"></script>
+		<script type="text/javascript" src="js/map.js"></script>
+		<script type="text/javascript" src="js/world_cloud.js"></script>
+		<script type="text/javascript" src="js/select.js"></script>  
+		<!-- 选择框飞入函数 -->
+		<script type="text/javascript" src="js/line.js"></script>
+		<script type="text/javascript" src="js/sun.js"></script>
+		
+		
+	</body>
+</html>
