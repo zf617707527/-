@@ -15,6 +15,7 @@ html, body {
 	background-size:100% 100%;
 	overflow-x:hidden;
 	overflow-y:auto;
+	
 }
 body.bg01 {background-image:url("../img/bg01.png");}
 body.bg02 {background-image:url("../img/bg02.png");}
@@ -138,3 +139,10 @@ body.bg04 {background-image:url("../img/bg04.png");}
   text-align-last:center;
 
 }
+
+*
+{
+	cursor: url('../icon/1.cur'), default;
+}
+
+

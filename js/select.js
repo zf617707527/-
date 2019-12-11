@@ -1,6 +1,7 @@
 function getVal(value) {
 	// alert(value);
 	// alert(map);
+	showSound("icon/click2.wav");
 	if(value == 1){map.flyTo({center: [52.03506,26.58396]});}
 	if(value == 2){map.flyTo({center: [-82.978706,15.810196]});}
 	if(value == 3){map.flyTo({center: [56.36929,26.574824]});}

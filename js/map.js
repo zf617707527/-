@@ -128,6 +128,7 @@ map.on('load', function() { /* on(type,callback)为type事件添加监听器，c
 
 //添加弹窗
 map.on('click', function(e) {
+	showSound("icon/click.mp3");
 	var features = map.queryRenderedFeatures(e.point, {
 		layers: ['points'] // replace this with the name of the layer
 	});
@@ -264,6 +265,7 @@ map.on('load', function() {
 
 
 map.on('click', function(e) {
+	showSound("icon/click.mp3");
 	var features = map.queryRenderedFeatures(e.point, {
 		layers: ['points'] // replace this with the name of the layer
 	});

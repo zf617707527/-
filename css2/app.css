@@ -76,3 +76,9 @@ body.bg08 {background-image:url("../img2/bg08.png");}
     z-index: 99999;
     background-size: cover;
 }
+
+*
+{
+	cursor: url('../icon/1.cur'), default;
+}
+

@@ -50,11 +50,13 @@ var val1data2 = [{
 							title: '参战军种',
 							icon: 'image://http://echarts.baidu.com/images/favicon.png',
 							onclick: function() {
+								showSound("icon/click.mp3");
 								$.ajax({
 									type: 'get',
 									url: 'data/services.json',
 									dataType: "json",        
 									success: function (result) {
+										
 										myChart1.setOption({
 											title:{
 												text:'参战军种占比'
@@ -77,11 +79,13 @@ var val1data2 = [{
 							title: '战争结果',
 							icon: 'image://http://echarts.baidu.com/images/favicon.png',
 							onclick: function() {
+								showSound("icon/click.mp3");
 								$.ajax({
 									type: 'get',
 									url: 'data/war_result.json',
 									dataType: "json",        
 									success: function (result) {
+										
 										myChart1.setOption({
 											title:{
 												text:'战争结果占比'
@@ -104,6 +108,7 @@ var val1data2 = [{
 							title: '战争规模',
 							icon: 'image://http://echarts.baidu.com/images/favicon.png',
 							onclick: function() {
+								showSound("icon/click.mp3");
 								$.ajax({
 									type: 'get',
 									url: 'data/scale.json',

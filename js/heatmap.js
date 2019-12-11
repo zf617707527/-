@@ -101,7 +101,7 @@ if (option && typeof option === "object") {
 //事件相应函数
 myChart.on('click', function(params) {
 	// alert(params.name);
-
+	showSound("icon/click.mp3");
 	$.ajax({
 		type: 'get',
 		url: 'data/tree.json',
