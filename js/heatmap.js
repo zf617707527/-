@@ -74,7 +74,7 @@ $.get('data/world2.json', function(usaJson) {
 		series: [{
 			name: '与美军交战的次数',
 			type: 'map',
-			roam: true,
+			roam: false,
 			map: 'world',
 			itemStyle: {
 				emphasis: {
