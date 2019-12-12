@@ -32,12 +32,14 @@ var worldCloudoption = {
 				series: [{
 					name: '网络拓扑特征指标',
 					type: 'wordCloud',
-					<!--												sizeRange: [20, 70],-->
+					sizeRange: [50, 90],
+					// shape:'forward',
+					size:1,
 					rotationRange: [-45, 90],
 					textPadding: 0,
 					autoSize: {
 						enable: true,
-						minSize: 6
+						minSize: 10
 
 					},
 					drawOutOfBound: true,

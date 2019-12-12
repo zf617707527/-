@@ -143,7 +143,7 @@ map.on('click', function(e) {
 			offset: [0, -15]
 		})
 		.setLngLat(feature.geometry.coordinates)
-		.setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.name + '</p><p>' + feature.properties.start +
+		.setHTML('<h3 style = "text-align:center;color :#A0522D">' + feature.properties.title + '</h3><p>' + feature.properties.name + '</p><p>' + feature.properties.start +
 			'</p><p>' + feature.properties.end + '</p><p>' + feature.properties.opponent + '</p><p>' + feature.properties.services +
 			'</p><p>' + feature.properties.aim + '</p><p>' + '</p><p>' + feature.properties.scale + '</p><p>' + feature.properties
 			.scription + '</p>')

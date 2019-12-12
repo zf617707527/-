@@ -43,8 +43,8 @@ body.bg04 {background-image:url("../img/bg04.png");}
 .xpanel-wrapper {padding-bottom:15px;box-sizing:border-box;}
 .xpanel-wrapper-1 {height:100%;}
 .xpanel-wrapper-2 {height:50%;}
-.xpanel-wrapper-3 {height:40%;}
-.xpanel-wrapper-4 {height:60%;}
+.xpanel-wrapper-3 {height:50%;}
+.xpanel-wrapper-4 {height:50%;}
 .xpanel {
 	padding:15px;
 	height:100%;
@@ -145,4 +145,25 @@ body.bg04 {background-image:url("../img/bg04.png");}
 	cursor: url('../icon/1.cur'), default;
 }
 
+/* 词云 */
+body {	
+	/*background: #000 url(index.png) no-repeat center 230px;*/
+}
+#div1 {
+	position:relative; width:0%; height:400px; margin:0 auto ; 
+}
+#div1 a {
+	position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; 
+	color:#000; 
+	font-weight:bold; 
+	text-decoration:none; 
+	padding: 3px 6px; 
+}
+#div1 a:hover {border: 1px solid #eee; background: #ccc; }
+#div1 .blue {color:blue;}
+#div1 .red {color:red;}
+#div1 .yellow {color:yellow;}
 
+p { font: 16px Microsoft YaHei; text-align: center; color: #ba0c0c; }
+p a { font-size: 14px; color: #ba0c0c; }
+p a:hover { color: red; }
