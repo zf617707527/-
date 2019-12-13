@@ -48,7 +48,8 @@ var val1data2 = [{
 						myTool1: {
 							show: true,
 							title: '参战军种',
-							icon: 'image://http://echarts.baidu.com/images/favicon.png',
+							// icon: 'image://http://echarts.baidu.com/images/favicon.png',
+							icon:'image://icon/11.png',
 							onclick: function() {
 								showSound("icon/click.mp3");
 								$.ajax({
@@ -77,7 +78,8 @@ var val1data2 = [{
 						myTool2: {
 							show: true,
 							title: '战争结果',
-							icon: 'image://http://echarts.baidu.com/images/favicon.png',
+							// icon: 'image://http://echarts.baidu.com/images/favicon.png',
+							icon:'image://icon/10.png',
 							onclick: function() {
 								showSound("icon/click.mp3");
 								$.ajax({
@@ -106,7 +108,8 @@ var val1data2 = [{
 						myTool3: {
 							show: true,
 							title: '战争规模',
-							icon: 'image://http://echarts.baidu.com/images/favicon.png',
+							// icon: 'image://http://echarts.baidu.com/images/favicon.png',
+							icon:'image://icon/8.png',
 							onclick: function() {
 								showSound("icon/click.mp3");
 								$.ajax({

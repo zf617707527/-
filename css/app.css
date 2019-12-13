@@ -142,7 +142,7 @@ body.bg04 {background-image:url("../img/bg04.png");}
 
 *
 {
-	cursor: url('../icon/1.cur'), default;
+	cursor: url('../icon/1.ani'), default;
 }
 
 /* 词云 */
