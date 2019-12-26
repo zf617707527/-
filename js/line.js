@@ -90,12 +90,15 @@ option = {
 };
 myChart5.setOption(option)
 // Enable data zoom when user click bar.
-var zoomSize = 6;
+var zoomSize = 2;
 myChart5.on('click', function (params) {
-    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+	// alert(params.dataIndex);
+   // alert(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+   // alert(data.lenth);
+   // alert(Math.min(params.dataIndex + zoomSize / 2, data.length - 1));
     myChart5.dispatchAction({
         type: 'dataZoom',
         startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, 6)]
     });
 });
